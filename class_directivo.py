@@ -78,8 +78,11 @@ class Directivo(Persona):
 
     # Es docente
     @property
-    def es_docente(self) -> bool:
-        return self.__es_docente
+    def es_docente(self) -> str:
+        if self.__es_docente:
+            return "Si"
+        else:
+            return "No"
     
     @es_docente.setter
     def set_es_docente(self, nuevo) -> None:

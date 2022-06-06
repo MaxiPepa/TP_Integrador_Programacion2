@@ -1,7 +1,5 @@
 from tkinter import *
-from tkinter import messagebox
 from tkinter import ttk
-from unittest import TestCase
 from class_alumno import *
 from class_directivo import *
 from class_docente import *
@@ -52,6 +50,15 @@ def mostrar_alumnos():
         ttk.Label(tab5, text=alumno.legajo).grid(row=row_alumnos, column=12)
         row_alumnos += 1
     agenda_alumnos.clear()
+
+def mostrar_directivos():
+    pass
+
+def mostrar_docentes():
+    pass
+
+def mostrar_personal():
+    pass
 
 #-----Variables y Funciones-----#
 
@@ -317,5 +324,49 @@ ttk.Button(tab5, text="Actualizar", command=mostrar_alumnos).grid(row=0, column=
 
 #-----Mostrar alumno-----#
 
+#-----Mostrar directivo-----#
+
+ttk.Label(tab6, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+ttk.Label(tab6, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+ttk.Label(tab6, text="Dirección").grid(row=0, column=2, padx=5, pady=5)
+ttk.Label(tab6, text="DNI").grid(row=0, column=3, padx=5, pady=5)
+ttk.Label(tab6, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
+ttk.Label(tab6, text="Teléfono de urgencia").grid(row=0, column=5, padx=5, pady=5)
+ttk.Label(tab6, text="Es docente").grid(row=0, column=6, padx=5, pady=5)
+ttk.Label(tab6, text="Legajo").grid(row=0, column=7, padx=5, pady=5)
+
+ttk.Button(tab6, text="Actualizar", command=mostrar_directivos).grid(row=0, column=8)
+
+#-----Mostrar directivo-----#
+
+#-----Mostrar docente-----#
+
+ttk.Label(tab7, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+ttk.Label(tab7, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+ttk.Label(tab7, text="Dirección").grid(row=0, column=2, padx=5, pady=5)
+ttk.Label(tab7, text="DNI").grid(row=0, column=3, padx=5, pady=5)
+ttk.Label(tab7, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
+ttk.Label(tab7, text="Teléfono de urgencia").grid(row=0, column=5, padx=5, pady=5)
+ttk.Label(tab7, text="Materia").grid(row=0, column=6, padx=5, pady=5)
+ttk.Label(tab7, text="Título").grid(row=0, column=7, padx=5, pady=5)
+ttk.Label(tab7, text="Legajo").grid(row=0, column=8, padx=5, pady=5)
+
+ttk.Button(tab7, text="Actualizar", command=mostrar_docentes).grid(row=0, column=9)
+
+#-----Mostrar docente-----#
+
+#-----Mostrar personal-----#
+
+ttk.Label(tab8, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+ttk.Label(tab8, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+ttk.Label(tab8, text="Teléfono").grid(row=0, column=2, padx=5, pady=5)
+ttk.Label(tab8, text="Dirección").grid(row=0, column=3, padx=5, pady=5)
+ttk.Label(tab8, text="DNI").grid(row=0, column=4, padx=5, pady=5)
+ttk.Label(tab8, text="Tarea").grid(row=0, column=5, padx=5, pady=5)
+ttk.Label(tab8, text="Legajo").grid(row=0, column=6, padx=5, pady=5)
+
+ttk.Button(tab8, text="Actualizar", command=mostrar_personal).grid(row=0, column=7)
+
+#-----Mostrar personal-----#
 
 root.mainloop()
