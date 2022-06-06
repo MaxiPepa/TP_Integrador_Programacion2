@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+from turtle import clear
 from class_alumno import *
 from class_directivo import *
 from class_docente import *
@@ -10,11 +11,6 @@ agenda_alumnos = []
 agenda_directivos = []
 agenda_docentes = []
 agenda_personal = []
-
-row_alumnos = 1
-row_directivos = 1
-row_docentes = 1
-row_personal = 1
 
 def crear_alumno(nombre, apellido, dni, direccion, telefono, email, nacionalidad, residencia, cant_hermanos, telf_madre, telf_padre, telf_adicional):
     nuevo_alumno = Alumno(nombre, apellido, dni, direccion, telefono, email, nacionalidad, residencia, cant_hermanos, telf_madre, telf_padre, telf_adicional)
@@ -32,40 +28,16 @@ def crear_personal(nombre, apellido, telefono, direccion, dni, tarea):
     nuevo_personal = Personal(nombre, apellido, telefono, direccion, dni, tarea)
     agenda_personal.append(nuevo_personal)
 
-def mostrar_alumnos():
-    global row_alumnos
-    for alumno in agenda_alumnos:
-        ttk.Label(tab5, text=alumno.nombre).grid(row=row_alumnos, column=0)
-        ttk.Label(tab5, text=alumno.apellido).grid(row=row_alumnos, column=1)
-        ttk.Label(tab5, text=alumno.dni).grid(row=row_alumnos, column=2)
-        ttk.Label(tab5, text=alumno.direccion).grid(row=row_alumnos, column=3)
-        ttk.Label(tab5, text=alumno.telefono).grid(row=row_alumnos, column=4)
-        ttk.Label(tab5, text=alumno.email).grid(row=row_alumnos, column=5)
-        ttk.Label(tab5, text=alumno.nacionalidad).grid(row=row_alumnos, column=6)
-        ttk.Label(tab5, text=alumno.residencia).grid(row=row_alumnos, column=7)
-        ttk.Label(tab5, text=alumno.cant_hermanos).grid(row=row_alumnos, column=8)
-        ttk.Label(tab5, text=alumno.telf_padre).grid(row=row_alumnos, column=9)
-        ttk.Label(tab5, text=alumno.telf_madre).grid(row=row_alumnos, column=10)
-        ttk.Label(tab5, text=alumno.telf_adicional).grid(row=row_alumnos, column=11)
-        ttk.Label(tab5, text=alumno.legajo).grid(row=row_alumnos, column=12)
-        row_alumnos += 1
-    agenda_alumnos.clear()
-
-def mostrar_directivos():
-    pass
-
-def mostrar_docentes():
-    pass
-
-def mostrar_personal():
-    pass
+def clear_frame(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
 
 #-----Variables y Funciones-----#
 
 #-----Ventana-----#
 
 root = Tk()
-root.geometry("1050x600")
+root.geometry("1300x600")
 root.title("Sist. de organización Colegio Chester")
 
 #-----Ventana-----#
@@ -306,66 +278,181 @@ button_agregar_personal.grid(row=6)
 
 #-----Mostrar alumno-----#
 
-ttk.Label(tab5, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
-ttk.Label(tab5, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
-ttk.Label(tab5, text="DNI").grid(row=0, column=2, padx=5, pady=5)
-ttk.Label(tab5, text="Dirección").grid(row=0, column=3, padx=5, pady=5)
-ttk.Label(tab5, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
-ttk.Label(tab5, text="Email").grid(row=0, column=5, padx=5, pady=5)
-ttk.Label(tab5, text="Nacionalidad").grid(row=0, column=6, padx=5, pady=5)
-ttk.Label(tab5, text="Residencia").grid(row=0, column=7, padx=5, pady=5)
-ttk.Label(tab5, text="Cantidad Hermanos").grid(row=0, column=8, padx=5, pady=5)
-ttk.Label(tab5, text="Teléfono Madre").grid(row=0, column=9, padx=5, pady=5)
-ttk.Label(tab5, text="Teléfono Padre").grid(row=0, column=10, padx=5, pady=5)
-ttk.Label(tab5, text="Teléfono Adicional").grid(row=0, column=11, padx=5, pady=5)
-ttk.Label(tab5, text="Legajo").grid(row=0, column=12, padx=5, pady=5)
+def borrar_alumno(legajo):
+    for alumno in agenda_alumnos:
+        if alumno.legajo == legajo:
+            agenda_alumnos.remove(alumno)
+    mostrar_alumnos()
 
-ttk.Button(tab5, text="Actualizar", command=mostrar_alumnos).grid(row=0, column=13)
+def mostrar_alumnos():
+    clear_frame(tab5)
+
+    row_alumnos = 1
+
+    ttk.Label(tab5, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+    ttk.Label(tab5, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+    ttk.Label(tab5, text="DNI").grid(row=0, column=2, padx=5, pady=5)
+    ttk.Label(tab5, text="Dirección").grid(row=0, column=3, padx=5, pady=5)
+    ttk.Label(tab5, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
+    ttk.Label(tab5, text="Email").grid(row=0, column=5, padx=5, pady=5)
+    ttk.Label(tab5, text="Nacionalidad").grid(row=0, column=6, padx=5, pady=5)
+    ttk.Label(tab5, text="Residencia").grid(row=0, column=7, padx=5, pady=5)
+    ttk.Label(tab5, text="Cantidad Hermanos").grid(row=0, column=8, padx=5, pady=5)
+    ttk.Label(tab5, text="Teléfono Madre").grid(row=0, column=9, padx=5, pady=5)
+    ttk.Label(tab5, text="Teléfono Padre").grid(row=0, column=10, padx=5, pady=5)
+    ttk.Label(tab5, text="Teléfono Adicional").grid(row=0, column=11, padx=5, pady=5)
+    ttk.Label(tab5, text="Legajo").grid(row=0, column=12, padx=5, pady=5)
+
+    ttk.Button(tab5, text="Actualizar", command=mostrar_alumnos).grid(row=0, column=13)
+    ttk.Button(tab5, text="Borrar por legajo", command=lambda: borrar_alumno(entry_borrar_alumno.get())).grid(row=0, column=14)
+    entry_borrar_alumno = ttk.Entry(tab5)
+    entry_borrar_alumno.grid(row=0, column=15)
+
+    for alumno in agenda_alumnos:
+        ttk.Label(tab5, text=alumno.nombre).grid(row=row_alumnos, column=0)
+        ttk.Label(tab5, text=alumno.apellido).grid(row=row_alumnos, column=1)
+        ttk.Label(tab5, text=alumno.dni).grid(row=row_alumnos, column=2)
+        ttk.Label(tab5, text=alumno.direccion).grid(row=row_alumnos, column=3)
+        ttk.Label(tab5, text=alumno.telefono).grid(row=row_alumnos, column=4)
+        ttk.Label(tab5, text=alumno.email).grid(row=row_alumnos, column=5)
+        ttk.Label(tab5, text=alumno.nacionalidad).grid(row=row_alumnos, column=6)
+        ttk.Label(tab5, text=alumno.residencia).grid(row=row_alumnos, column=7)
+        ttk.Label(tab5, text=alumno.cant_hermanos).grid(row=row_alumnos, column=8)
+        ttk.Label(tab5, text=alumno.telf_padre).grid(row=row_alumnos, column=9)
+        ttk.Label(tab5, text=alumno.telf_madre).grid(row=row_alumnos, column=10)
+        ttk.Label(tab5, text=alumno.telf_adicional).grid(row=row_alumnos, column=11)
+        ttk.Label(tab5, text=alumno.legajo).grid(row=row_alumnos, column=12)
+        row_alumnos += 1
+    
+
+mostrar_alumnos()
 
 #-----Mostrar alumno-----#
 
 #-----Mostrar directivo-----#
 
-ttk.Label(tab6, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
-ttk.Label(tab6, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
-ttk.Label(tab6, text="Dirección").grid(row=0, column=2, padx=5, pady=5)
-ttk.Label(tab6, text="DNI").grid(row=0, column=3, padx=5, pady=5)
-ttk.Label(tab6, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
-ttk.Label(tab6, text="Teléfono de urgencia").grid(row=0, column=5, padx=5, pady=5)
-ttk.Label(tab6, text="Es docente").grid(row=0, column=6, padx=5, pady=5)
-ttk.Label(tab6, text="Legajo").grid(row=0, column=7, padx=5, pady=5)
+def borrar_directivo(legajo):
+    for directivo in agenda_directivos:
+        if directivo.legajo == legajo:
+            agenda_directivos.remove(directivo)
+    mostrar_directivos()
 
-ttk.Button(tab6, text="Actualizar", command=mostrar_directivos).grid(row=0, column=8)
+def mostrar_directivos():
+    clear_frame(tab6)
+
+    row_directivos = 1
+
+    ttk.Label(tab6, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+    ttk.Label(tab6, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+    ttk.Label(tab6, text="Dirección").grid(row=0, column=2, padx=5, pady=5)
+    ttk.Label(tab6, text="DNI").grid(row=0, column=3, padx=5, pady=5)
+    ttk.Label(tab6, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
+    ttk.Label(tab6, text="Teléfono de urgencia").grid(row=0, column=5, padx=5, pady=5)
+    ttk.Label(tab6, text="Es docente").grid(row=0, column=6, padx=5, pady=5)
+    ttk.Label(tab6, text="Legajo").grid(row=0, column=7, padx=5, pady=5)
+
+    ttk.Button(tab6, text="Actualizar", command=mostrar_directivos).grid(row=0, column=8)
+    ttk.Button(tab6, text="Borrar por legajo", command=lambda: borrar_directivo(entry_borrar_directivo.get())).grid(row=0, column=9)
+    entry_borrar_directivo = ttk.Entry(tab6)
+    entry_borrar_directivo.grid(row=0, column=10)
+
+    for directivo in agenda_directivos:
+        ttk.Label(tab6, text=directivo.nombre).grid(row=row_directivos, column=0)
+        ttk.Label(tab6, text=directivo.apellido).grid(row=row_directivos, column=1)
+        ttk.Label(tab6, text=directivo.direccion).grid(row=row_directivos, column=2)
+        ttk.Label(tab6, text=directivo.dni).grid(row=row_directivos, column=3)
+        ttk.Label(tab6, text=directivo.telefono).grid(row=row_directivos, column=4)
+        ttk.Label(tab6, text=directivo.telf_urgencia).grid(row=row_directivos, column=5)
+        ttk.Label(tab6, text=directivo.es_docente).grid(row=row_directivos, column=6)
+        ttk.Label(tab6, text=directivo.legajo).grid(row=row_directivos, column=7)
+        row_directivos += 1
+
+mostrar_directivos()
 
 #-----Mostrar directivo-----#
 
 #-----Mostrar docente-----#
 
-ttk.Label(tab7, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
-ttk.Label(tab7, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
-ttk.Label(tab7, text="Dirección").grid(row=0, column=2, padx=5, pady=5)
-ttk.Label(tab7, text="DNI").grid(row=0, column=3, padx=5, pady=5)
-ttk.Label(tab7, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
-ttk.Label(tab7, text="Teléfono de urgencia").grid(row=0, column=5, padx=5, pady=5)
-ttk.Label(tab7, text="Materia").grid(row=0, column=6, padx=5, pady=5)
-ttk.Label(tab7, text="Título").grid(row=0, column=7, padx=5, pady=5)
-ttk.Label(tab7, text="Legajo").grid(row=0, column=8, padx=5, pady=5)
+def borrar_docente(legajo):
+    for docente in agenda_docentes:
+        if docente.legajo == legajo:
+            agenda_docentes.remove(docente)
+    mostrar_docentes()
 
-ttk.Button(tab7, text="Actualizar", command=mostrar_docentes).grid(row=0, column=9)
+def mostrar_docentes():
+    clear_frame(tab7)
+
+    row_docentes = 1
+
+    ttk.Label(tab7, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+    ttk.Label(tab7, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+    ttk.Label(tab7, text="Dirección").grid(row=0, column=2, padx=5, pady=5)
+    ttk.Label(tab7, text="DNI").grid(row=0, column=3, padx=5, pady=5)
+    ttk.Label(tab7, text="Teléfono").grid(row=0, column=4, padx=5, pady=5)
+    ttk.Label(tab7, text="Teléfono de urgencia").grid(row=0, column=5, padx=5, pady=5)
+    ttk.Label(tab7, text="Materia").grid(row=0, column=6, padx=5, pady=5)
+    ttk.Label(tab7, text="Título").grid(row=0, column=7, padx=5, pady=5)
+    ttk.Label(tab7, text="Legajo").grid(row=0, column=8, padx=5, pady=5)
+
+    ttk.Button(tab7, text="Actualizar", command=mostrar_docentes).grid(row=0, column=9)
+    ttk.Button(tab7, text="Borrar por legajo", command=lambda: borrar_docente(entry_borrar_docente.get())).grid(row=0, column=10)
+    entry_borrar_docente = ttk.Entry(tab7)
+    entry_borrar_docente.grid(row=0, column=11)
+
+    for docente in agenda_docentes:
+        ttk.Label(tab7, text=docente.nombre).grid(row=row_docentes, column=0)
+        ttk.Label(tab7, text=docente.apellido).grid(row=row_docentes, column=1)
+        ttk.Label(tab7, text=docente.direccion).grid(row=row_docentes, column=2)
+        ttk.Label(tab7, text=docente.dni).grid(row=row_docentes, column=3)
+        ttk.Label(tab7, text=docente.telefono).grid(row=row_docentes, column=4)
+        ttk.Label(tab7, text=docente.telf_urgencia).grid(row=row_docentes, column=5)
+        ttk.Label(tab7, text=docente.materia).grid(row=row_docentes, column=6)
+        ttk.Label(tab7, text=docente.titulo).grid(row=row_docentes, column=7)
+        ttk.Label(tab7, text=docente.legajo).grid(row=row_docentes, column=8)
+        row_docentes += 1
+
+mostrar_docentes()
 
 #-----Mostrar docente-----#
 
 #-----Mostrar personal-----#
 
-ttk.Label(tab8, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
-ttk.Label(tab8, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
-ttk.Label(tab8, text="Teléfono").grid(row=0, column=2, padx=5, pady=5)
-ttk.Label(tab8, text="Dirección").grid(row=0, column=3, padx=5, pady=5)
-ttk.Label(tab8, text="DNI").grid(row=0, column=4, padx=5, pady=5)
-ttk.Label(tab8, text="Tarea").grid(row=0, column=5, padx=5, pady=5)
-ttk.Label(tab8, text="Legajo").grid(row=0, column=6, padx=5, pady=5)
+def borrar_personal(legajo):
+    for personal in agenda_personal:
+        if personal.legajo == legajo:
+            agenda_personal.remove(personal)
+    mostrar_personal()
 
-ttk.Button(tab8, text="Actualizar", command=mostrar_personal).grid(row=0, column=7)
+def mostrar_personal():
+    clear_frame(tab8)
+
+    row_personal = 1
+
+    ttk.Label(tab8, text="Nombre").grid(row=0, column=0, padx=5, pady=5)
+    ttk.Label(tab8, text="Apellido").grid(row=0, column=1, padx=5, pady=5)
+    ttk.Label(tab8, text="Teléfono").grid(row=0, column=2, padx=5, pady=5)
+    ttk.Label(tab8, text="Dirección").grid(row=0, column=3, padx=5, pady=5)
+    ttk.Label(tab8, text="DNI").grid(row=0, column=4, padx=5, pady=5)
+    ttk.Label(tab8, text="Tarea").grid(row=0, column=5, padx=5, pady=5)
+    ttk.Label(tab8, text="Legajo").grid(row=0, column=6, padx=5, pady=5)
+
+    ttk.Button(tab8, text="Actualizar", command=mostrar_personal).grid(row=0, column=7)
+    ttk.Button(tab8, text="Borrar por legajo", command=lambda: borrar_personal(entry_borrar_personal.get())).grid(row=0, column=8)
+    entry_borrar_personal = ttk.Entry(tab8)
+    entry_borrar_personal.grid(row=0, column=9)
+
+    for personal in agenda_personal:
+        ttk.Label(tab8, text=personal.nombre).grid(row=row_personal, column=0)
+        ttk.Label(tab8, text=personal.apellido).grid(row=row_personal, column=1)
+        ttk.Label(tab8, text=personal.telefono).grid(row=row_personal, column=2)
+        ttk.Label(tab8, text=personal.direccion).grid(row=row_personal, column=3)
+        ttk.Label(tab8, text=personal.dni).grid(row=row_personal, column=4)
+        ttk.Label(tab8, text=personal.tarea).grid(row=row_personal, column=5)
+        ttk.Label(tab8, text=personal.legajo).grid(row=row_personal, column=6)
+        row_personal += 1
+
+
+mostrar_personal()
 
 #-----Mostrar personal-----#
 
