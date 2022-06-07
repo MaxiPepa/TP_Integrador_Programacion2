@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-from turtle import clear
 from class_alumno import *
 from class_directivo import *
 from class_docente import *
